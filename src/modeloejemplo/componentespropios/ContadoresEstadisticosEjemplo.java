@@ -33,6 +33,10 @@ public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
 	}
 
 	public void Agregarhistorial(List list) {
+		// Posicion 0: Clase de la solicitud
+		// Posicion 1: Duracion del procesamiento
+		// Posicion 2: Cantidad de productos
+		
 		historialClases.add(list.toString());
 	}
 
