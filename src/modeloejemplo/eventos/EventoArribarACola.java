@@ -32,7 +32,8 @@ public class EventoArribarACola extends Evento {
 		}
 		else {
 			modeloActual.atenderSolicitud(solicitudParaAgregar);
-			int duracionDelProcesamiento = libreria.tiempoDeProcesamiento();
+			// int duracionDelProcesamiento = libreria.tiempoDeProcesamiento();
+			float duracionDelProcesamiento = libreria.tiempoDeProcesamiento(solicitudParaAgregar.getClase());
 			EventoTerminaProcesamiento nuevoEventoAdicional = new EventoTerminaProcesamiento(duracionDelProcesamiento);	
 			eventos.agregar(nuevoEventoAdicional);
 		}

@@ -27,7 +27,8 @@ public class EventoTerminaProcesamiento extends Evento {
 		if(modeloActual.haySolicitudesEnEspera()) {
 			Solicitud solicitudAProcesar = modeloActual.obtenerSolicitudPrioritaria();
 			modeloActual.atenderSolicitud(solicitudAProcesar);
-			int duracionDelProcesamiento = libreria.tiempoDeProcesamiento();
+			// int duracionDelProcesamiento = libreria.tiempoDeProcesamiento();
+			float duracionDelProcesamiento = libreria.tiempoDeProcesamiento(solicitudAProcesar.getClase());
 			EventoTerminaProcesamiento nuevoEvento = new EventoTerminaProcesamiento(duracionDelProcesamiento);	
 			eventos.agregar(nuevoEvento);	
 		}
