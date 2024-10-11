@@ -1,12 +1,14 @@
 package modeloejemplo.componentespropios;
 
 import des.ContadoresEstadisticos;
+import java.util.List;
 
 /* Variables que almacenan información estadística referida al comportamiento del sistema. */
 
 public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
 	
 	private int cantSolicitudesProcesadas;
+	private List<String> historialClases;
 
 	public ContadoresEstadisticosEjemplo() {
 		super();
@@ -22,6 +24,10 @@ public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
 
 	public void actualizarCantProcesadas() {
 		cantSolicitudesProcesadas++;		
+	}
+
+	public List<String> historialClases(){
+		return historialClases;
 	}
 
 }
