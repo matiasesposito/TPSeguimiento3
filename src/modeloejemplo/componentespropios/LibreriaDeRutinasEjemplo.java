@@ -1,6 +1,7 @@
 package modeloejemplo.componentespropios;
 
 import des.LibreriaDeRutinas;
+import java.util.ArrayList;
 
 /* Subprogramas usados para generar observaciones aleatorias desde las distribuciones de 
  * probabilidad asociadas al modelo. */
@@ -19,7 +20,7 @@ public class LibreriaDeRutinasEjemplo extends LibreriaDeRutinas {
 	// 	return 1;
 	// }
 
-	public float tiempoDeProcesamiento(int clase) {
+	public ArrayList tiempoDeProcesamiento(int clase) {
 		// Si es de clase 1, las cantidades son: 1 : 57%, 2:33 %, 3:10%
 		// Si es de clase 2, las cantidades son: 1 : 27%, 2:25 %, 3:35%, 4:13%
 
@@ -30,19 +31,22 @@ public class LibreriaDeRutinasEjemplo extends LibreriaDeRutinas {
 		float tiempoProcBebidas = -2.4f * (float) Math.log(1 - Math.random());
 		float tiempoProcPanaderia = -3.5f * (float) Math.log(1 - Math.random());
 
+		// Generar un ArrayList para retornar los valores tiempoDeProcesamiento, cantidad de productos
+		ArrayList list = new ArrayList();
+
 		if (clase == 1) {
 			double random = Math.random();
-			if (random < 0.57) return tiempoProcBebidas;
-			if (random < 0.90) return tiempoProcBebidas * 0.10f + tiempoProcBebidas;
-			return tiempoProcBebidas * 0.13f + tiempoProcBebidas;
+			if (random < 0.57) {list.add(tiempoProcBebidas); list.add(1);}
+			if (random < 0.90) {list.add(tiempoProcBebidas * 0.12f + tiempoProcBebidas); list.add(2);}
+			list.add(tiempoProcBebidas * 0.15f + tiempoProcBebidas); list.add(3);
 		}else if(clase == 2) {
 			double random = Math.random();
-			if (random < 0.27) return tiempoProcPanaderia;
-			if (random < 0.52) return tiempoProcPanaderia * 0.12f + tiempoProcPanaderia;
-			if (random < 0.87) return tiempoProcPanaderia * 0.15f + tiempoProcPanaderia;
-			return tiempoProcPanaderia * 0.20f + tiempoProcPanaderia;
+			if (random < 0.27) {list.add(tiempoProcPanaderia); list.add(1);}
+			if (random < 0.52) {list.add(tiempoProcPanaderia * 0.25f + tiempoProcPanaderia); list.add(2);}
+			if (random < 0.87) {list.add(tiempoProcPanaderia * 0.60f + tiempoProcPanaderia); list.add(3);}
+			list.add(tiempoProcPanaderia * 0.13f + tiempoProcPanaderia); list.add(4);
 		}
-		return 1;
+		return list;
 	}
 
 }

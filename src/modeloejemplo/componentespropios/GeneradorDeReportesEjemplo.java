@@ -16,7 +16,8 @@ public class GeneradorDeReportesEjemplo extends GeneradorDeReportes {
 		System.out.println("***GENERADOR DE REPORTES *** ");
 		System.out.println("------------------------------------------------------");
 
-		System.out.println("La cantidad de solicitudes procesadas es de: " + contadoresEjemplo.getCantProcesadas());		
+		System.out.println("La cantidad de solicitudes procesadas es de: " + contadoresEjemplo.getCantProcesadas());
+		System.out.println("El historial de clases de solicitudes procesadas es: " + contadoresEjemplo.historialClases());		
 	}
 
 }

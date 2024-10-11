@@ -23,12 +23,11 @@ public class EventoTerminaProcesamiento extends Evento {
 		contadoresEjemplo.actualizarCantProcesadas();
 		
 		ModeloDelEjemplo modeloActual = (ModeloDelEjemplo) modelo;
-		
+
 		if(modeloActual.haySolicitudesEnEspera()) {
 			Solicitud solicitudAProcesar = modeloActual.obtenerSolicitudPrioritaria();
 			modeloActual.atenderSolicitud(solicitudAProcesar);
-			// int duracionDelProcesamiento = libreria.tiempoDeProcesamiento();
-			float duracionDelProcesamiento = libreria.tiempoDeProcesamiento(solicitudAProcesar.getClase());
+			float duracionDelProcesamiento = libreria.tiempoDeProcesamiento(solicitudAProcesar.getClase()).indexOf(0);
 			EventoTerminaProcesamiento nuevoEvento = new EventoTerminaProcesamiento(duracionDelProcesamiento);	
 			eventos.agregar(nuevoEvento);	
 		}
