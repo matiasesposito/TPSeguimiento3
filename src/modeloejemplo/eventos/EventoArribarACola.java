@@ -26,11 +26,13 @@ public class EventoArribarACola extends Evento {
 		ContadoresEstadisticosEjemplo contadoresEjemplo = (ContadoresEstadisticosEjemplo) contadores;
 		
 		//Agendar el próximo arribo de solicitud.
-		EventoArribarACola nuevoEvento = new EventoArribarACola(libreria.tiempoEntreArribosSolicitudes());	
+		float tiempoEntreArribos = libreria.tiempoEntreArribosSolicitudes();
+		EventoArribarACola nuevoEvento = new EventoArribarACola(tiempoEntreArribos);	
 		eventos.agregar(nuevoEvento);
 		
 		//Procesar este arribo, para lo cual es necesario generar la solicitud que acaba de arribar.
 		Solicitud solicitudParaAgregar = new Solicitud();
+		solicitudParaAgregar.setTiempoArribo(getTiempoDeOcurrencia());
 		float duracionDelProcesamiento = (float) libreria.tiempoDeProcesamiento(solicitudParaAgregar.getClase()).get(0);
 		int cantidadDeProductos = (int) libreria.tiempoDeProcesamiento(solicitudParaAgregar.getClase()).get(1);
 
@@ -38,6 +40,7 @@ public class EventoArribarACola extends Evento {
 		list.add(solicitudParaAgregar.getClase());
 		list.add(duracionDelProcesamiento);
 		list.add(cantidadDeProductos);
+		list.add(tiempoEntreArribos);
 		contadoresEjemplo.Agregarhistorial(list);
 
 		//Chequear si hay algún servidor(empleada) libre que pueda atender la solicitud, de lo contrario añadir a la cola
@@ -55,6 +58,8 @@ public class EventoArribarACola extends Evento {
 				EventoTerminaProcesamiento nuevoEventoAdicional = new EventoTerminaProcesamiento(duracionDelProcesamiento);
 				nuevoEventoAdicional.setServidorInvolucrado(i);	
 				eventos.agregar(nuevoEventoAdicional);
+
+				contadoresEjemplo.actualizarTiempoEnSistema(duracionDelProcesamiento);
 				break;
 			}
 		}

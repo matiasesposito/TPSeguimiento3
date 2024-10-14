@@ -5,6 +5,15 @@ package modeloejemplo.estadodelsistema;
 public class Solicitud {
 	
 	private int clase;
+	private double tiempoArribo;
+
+	public double getTiempoArribo() {
+		return tiempoArribo;
+	}
+	
+	public void setTiempoArribo(double tiempoArribo) {
+		this.tiempoArribo = tiempoArribo;
+	}
 
 	public Solicitud() {
 		super();

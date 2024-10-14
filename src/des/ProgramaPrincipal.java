@@ -57,6 +57,7 @@ public class ProgramaPrincipal {
 			
 		}while(!terminoLaSimulacion(reloj,contadores));
 		
+		reporte.setTiempoFinSimulacion(reloj.getValor());
 		reporte.run(contadores);
 
 	}

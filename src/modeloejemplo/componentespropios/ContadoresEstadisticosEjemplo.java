@@ -7,35 +7,55 @@ import java.util.List;
 /* Variables que almacenan información estadística referida al comportamiento del sistema. */
 
 public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
-	
-	private int cantSolicitudesProcesadas;
+	int cantidadServidores = 2;
+	//Estadisticos auxiliares
+	private ArrayList<Integer> cantSolicitudesProcesadas;
 	private ArrayList<ArrayList> historialClases;
+	private double tiempoTotalEnSistema;
+	//Estadisticos para salida
 	private float beneficioObtenido;
 	private int longPromCola;  //Falta este
-	private float tiempoPromClientesKiosco;
-	private ArrayList<Float> tasaAtencionEmpleadas;
-	private ArrayList<Float> PorcentajeTiempoLibreEmpleadas;
+	private double tiempoPromClientesKiosco;
+	private ArrayList<Double> tasaAtencionEmpleadas;
+	private ArrayList<Double> PorcentajeTiempoLibreEmpleadas;
 
 	public ContadoresEstadisticosEjemplo() {
 		super();
 	}
 
 	public void inicializar() {
-		cantSolicitudesProcesadas = 0;
+		cantSolicitudesProcesadas = new ArrayList<Integer>();
+		for (int i = 0; i < cantidadServidores; i++) {
+			cantSolicitudesProcesadas.add(0);
+		}
 		this.historialClases = new ArrayList<>();
+		tiempoTotalEnSistema = 0;
+
 		beneficioObtenido = 0;
 		longPromCola = 0;
 		tiempoPromClientesKiosco = 0;
-		tasaAtencionEmpleadas = new ArrayList<Float>();
-		PorcentajeTiempoLibreEmpleadas = new ArrayList<Float>();
+		tasaAtencionEmpleadas = new ArrayList<Double>();
+		for (int i = 0; i < cantidadServidores; i++) {
+			tasaAtencionEmpleadas.add(null);
+		}
+		PorcentajeTiempoLibreEmpleadas = new ArrayList<Double>();
 	}
 
-	public int getCantProcesadas() {
+	public ArrayList<Integer> getCantSolicitudesProcesadas() {
 		return cantSolicitudesProcesadas;
 	}
 
-	public void actualizarCantProcesadas() {
-		cantSolicitudesProcesadas++;		
+	public int getCantTotalProcesadas() {
+		int cantProcesadas = 0;
+		for (int i = 0; i < cantSolicitudesProcesadas.size(); i++) {
+			cantProcesadas += cantSolicitudesProcesadas.get(i);
+		}
+		return cantProcesadas;
+	}
+
+	public void actualizarCantProcesadas(int i) {
+		Integer cant = cantSolicitudesProcesadas.get(i);
+		cantSolicitudesProcesadas.set(i, cant + 1);	
 	}
 
 	public ArrayList<ArrayList> getHistorialClases(){
@@ -46,8 +66,21 @@ public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
 		// Posicion 0: Clase de la solicitud
 		// Posicion 1: Duracion del procesamiento
 		// Posicion 2: Cantidad de productos
+		// Posicion 3: Tiempo entre arribos
 		
 		historialClases.add(list);
+	}
+
+	public void actualizarTiempoEnSistema(double t) {
+		tiempoTotalEnSistema += t;		
+	}
+
+	public void calcularTiempoPromClientesKiosco() {
+		tiempoPromClientesKiosco = tiempoTotalEnSistema / getCantTotalProcesadas();
+	}
+
+	public double getTiempoPromClientesKiosco() {
+		return tiempoPromClientesKiosco;
 	}
 
 	public float getBeneficioObtenido() {
@@ -64,6 +97,17 @@ public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
 			beneficioObtenido += gananciaBebidas*cantidad;
 		} else {	//Panaderia
 			beneficioObtenido += gananciaPanaderia*cantidad;
+		}
+	}
+
+	public ArrayList<Double> getTasaAtencionEmpleadas() {
+		return tasaAtencionEmpleadas;
+	}
+
+	public void calcularTasaAtencionEmpleadas(double tiempoFinSimulacion) {
+		for (int i = 0; i < cantSolicitudesProcesadas.size(); i++) {
+			double tasa = cantSolicitudesProcesadas.get(i) / (tiempoFinSimulacion / 60);
+			tasaAtencionEmpleadas.set(i, tasa);
 		}
 	}
 }

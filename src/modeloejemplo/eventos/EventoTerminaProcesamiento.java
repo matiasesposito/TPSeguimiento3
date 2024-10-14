@@ -32,9 +32,9 @@ public class EventoTerminaProcesamiento extends Evento {
 			LibreriaDeRutinasEjemplo libreria) {
 		
 		ContadoresEstadisticosEjemplo contadoresEjemplo = (ContadoresEstadisticosEjemplo) contadores;
-		contadoresEjemplo.actualizarCantProcesadas();
+		contadoresEjemplo.actualizarCantProcesadas(servidorInvolucrado);
 		//Actualización de contadores estadisticos
-		int indiceUltSolicitudProcesada = contadoresEjemplo.getCantProcesadas() - 1;
+		int indiceUltSolicitudProcesada = contadoresEjemplo.getCantTotalProcesadas() - 1;
 		ArrayList UltSolicitudProcesadaDatos = contadoresEjemplo.getHistorialClases().get(indiceUltSolicitudProcesada);
 		int claseUltSolicitudProcesada = (int) UltSolicitudProcesadaDatos.get(0);
 		int cantidadUltSolicitudProcesada = (int) UltSolicitudProcesadaDatos.get(2);
@@ -48,7 +48,10 @@ public class EventoTerminaProcesamiento extends Evento {
 			float duracionDelProcesamiento = (float) libreria.tiempoDeProcesamiento(solicitudAProcesar.getClase()).get(0);
 			EventoTerminaProcesamiento nuevoEvento = new EventoTerminaProcesamiento(duracionDelProcesamiento);
 			nuevoEvento.setServidorInvolucrado(servidorInvolucrado);		
-			eventos.agregar(nuevoEvento);	
+			eventos.agregar(nuevoEvento);
+			
+			double tiempoEnSistema = (getTiempoDeOcurrencia() - solicitudAProcesar.getTiempoArribo()) + duracionDelProcesamiento;
+			contadoresEjemplo.actualizarTiempoEnSistema(tiempoEnSistema);
 		}
 		else {
 			modeloActual.actualizarServidorDisponible(servidorInvolucrado);
