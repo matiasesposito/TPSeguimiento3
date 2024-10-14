@@ -37,14 +37,14 @@ public class LibreriaDeRutinasEjemplo extends LibreriaDeRutinas {
 		if (clase == 1) {
 			double random = Math.random();
 			if (random < 0.57) {list.add(tiempoProcBebidas); list.add(1);}
-			if (random < 0.90) {list.add(tiempoProcBebidas * 0.12f + tiempoProcBebidas); list.add(2);}
-			list.add(tiempoProcBebidas * 0.15f + tiempoProcBebidas); list.add(3);
+			if (random < 0.90) {list.add(tiempoProcBebidas * 0.10f + tiempoProcBebidas); list.add(2);}
+			list.add(tiempoProcBebidas * 0.13f + tiempoProcBebidas); list.add(3);
 		}else if(clase == 2) {
 			double random = Math.random();
 			if (random < 0.27) {list.add(tiempoProcPanaderia); list.add(1);}
-			if (random < 0.52) {list.add(tiempoProcPanaderia * 0.25f + tiempoProcPanaderia); list.add(2);}
-			if (random < 0.87) {list.add(tiempoProcPanaderia * 0.60f + tiempoProcPanaderia); list.add(3);}
-			list.add(tiempoProcPanaderia * 0.13f + tiempoProcPanaderia); list.add(4);
+			if (random < 0.52) {list.add(tiempoProcPanaderia * 0.12f + tiempoProcPanaderia); list.add(2);}
+			if (random < 0.87) {list.add(tiempoProcPanaderia * 0.15f + tiempoProcPanaderia); list.add(3);}
+			list.add(tiempoProcPanaderia * 0.20f + tiempoProcPanaderia); list.add(4);
 		}
 		return list;
 	}
