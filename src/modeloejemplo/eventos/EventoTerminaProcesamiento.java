@@ -1,5 +1,8 @@
 package modeloejemplo.eventos;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import des.ContadoresEstadisticos;
 import des.EstadoDelSistema;
 import des.Evento;
@@ -21,6 +24,12 @@ public class EventoTerminaProcesamiento extends Evento {
 		
 		ContadoresEstadisticosEjemplo contadoresEjemplo = (ContadoresEstadisticosEjemplo) contadores;
 		contadoresEjemplo.actualizarCantProcesadas();
+		//Actualización de contadores estadisticos
+		int indiceUltSolicitudProcesada = contadoresEjemplo.getCantProcesadas() - 1;
+		ArrayList UltSolicitudProcesada = contadoresEjemplo.getHistorialClases().get(indiceUltSolicitudProcesada);
+		int claseUltSolicitudProcesada = (int) UltSolicitudProcesada.get(0);
+		int cantidadUltSolicitudProcesada = (int) UltSolicitudProcesada.get(2);
+		contadoresEjemplo.actualizarBeneficio(claseUltSolicitudProcesada, cantidadUltSolicitudProcesada);
 		
 		ModeloDelEjemplo modeloActual = (ModeloDelEjemplo) modelo;
 

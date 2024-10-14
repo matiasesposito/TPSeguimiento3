@@ -34,7 +34,7 @@ public class EventoArribarACola extends Evento {
 		float duracionDelProcesamiento = (float) libreria.tiempoDeProcesamiento(solicitudParaAgregar.getClase()).get(0);
 		int cantidadDeProductos = (int) libreria.tiempoDeProcesamiento(solicitudParaAgregar.getClase()).get(1);
 
-		List list = new ArrayList();
+		ArrayList list = new ArrayList();
 		list.add(solicitudParaAgregar.getClase());
 		list.add(duracionDelProcesamiento);
 		list.add(cantidadDeProductos);

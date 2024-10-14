@@ -13,9 +13,7 @@ public class ColaDeSolicitudes {
 	}
 
 	public void encolarSolicitud(Solicitud solicitudParaAgregar) {
-		switch(solicitudParaAgregar.getClase()) {
-		case 1: colaKiosco.add(solicitudParaAgregar); break;
-		}
+		colaKiosco.add(solicitudParaAgregar);
 	}
 
 	public int getCantSolicitudesEsperando() {
