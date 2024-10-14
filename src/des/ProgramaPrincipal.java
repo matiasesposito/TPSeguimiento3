@@ -35,19 +35,23 @@ public class ProgramaPrincipal {
 		
 		//Flujo de control
 		inicializacion.run(reloj,modelo,contadores,eventos,libreria);
-		
+
+		System.out.println("------------------------------------------------------");
+		System.out.println("***PROGRAMA PRINCIPAL *** t=" + reloj.getValor());
+		System.out.println("------------------------------------------------------");
+
 		do { 
-			
-			System.out.println("------------------------------------------------------");
-			System.out.println("***PROGRAMA PRINCIPAL *** t=" + reloj.getValor());
-			System.out.println("------------------------------------------------------");
-						
+										
 			//Invocar a la rutina de tiempo.
 			Evento eventoPorEjecutar = manejoDeTiempo.run(eventos,reloj);
 			
 			System.out.println("\t\t-- El SIMULADOR determina que el EVENTO MAS INMINENTE se dará en " + eventoPorEjecutar.getTiempoQueFaltaParaQueOcurra() + " unidades de tiempo.");
 			System.out.println("\t\t-- El SIMULADOR actualiza el RELOJ para ejecutar el EVENTO MAS INMINENTE del tipo " + eventoPorEjecutar.getClass().getSimpleName() + ".");
 			
+			System.out.println("------------------------------------------------------");
+			System.out.println("***PROGRAMA PRINCIPAL *** t=" + reloj.getValor());
+			System.out.println("------------------------------------------------------");
+
 			//Invocar a la rutina de evento.
 			eventoPorEjecutar.rutinaDeEvento(modelo,contadores,eventos,libreria);
 			

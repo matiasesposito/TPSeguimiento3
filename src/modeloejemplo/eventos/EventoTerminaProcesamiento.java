@@ -13,6 +13,15 @@ import modeloejemplo.estadodelsistema.ModeloDelEjemplo;
 import modeloejemplo.estadodelsistema.Solicitud;
 
 public class EventoTerminaProcesamiento extends Evento {
+	int servidorInvolucrado;
+
+	public int getServidorInvolucrado() {
+		return servidorInvolucrado;
+	}
+
+	public void setServidorInvolucrado(int servidorInvolucrado) {
+		this.servidorInvolucrado = servidorInvolucrado;
+	}
 
 	public EventoTerminaProcesamiento(double tiempoDeOcurrencia) {
 		super(tiempoDeOcurrencia);
@@ -26,23 +35,23 @@ public class EventoTerminaProcesamiento extends Evento {
 		contadoresEjemplo.actualizarCantProcesadas();
 		//Actualización de contadores estadisticos
 		int indiceUltSolicitudProcesada = contadoresEjemplo.getCantProcesadas() - 1;
-		ArrayList UltSolicitudProcesada = contadoresEjemplo.getHistorialClases().get(indiceUltSolicitudProcesada);
-		int claseUltSolicitudProcesada = (int) UltSolicitudProcesada.get(0);
-		int cantidadUltSolicitudProcesada = (int) UltSolicitudProcesada.get(2);
+		ArrayList UltSolicitudProcesadaDatos = contadoresEjemplo.getHistorialClases().get(indiceUltSolicitudProcesada);
+		int claseUltSolicitudProcesada = (int) UltSolicitudProcesadaDatos.get(0);
+		int cantidadUltSolicitudProcesada = (int) UltSolicitudProcesadaDatos.get(2);
 		contadoresEjemplo.actualizarBeneficio(claseUltSolicitudProcesada, cantidadUltSolicitudProcesada);
 		
 		ModeloDelEjemplo modeloActual = (ModeloDelEjemplo) modelo;
 
 		if(modeloActual.haySolicitudesEnEspera()) {
 			Solicitud solicitudAProcesar = modeloActual.obtenerSolicitudPrioritaria();
-			modeloActual.atenderSolicitud(solicitudAProcesar);
-			float duracionDelProcesamiento = libreria.tiempoDeProcesamiento(solicitudAProcesar.getClase()).indexOf(0);
-			EventoTerminaProcesamiento nuevoEvento = new EventoTerminaProcesamiento(duracionDelProcesamiento);	
+			modeloActual.atenderSolicitud(servidorInvolucrado, solicitudAProcesar);
+			float duracionDelProcesamiento = (float) libreria.tiempoDeProcesamiento(solicitudAProcesar.getClase()).get(0);
+			EventoTerminaProcesamiento nuevoEvento = new EventoTerminaProcesamiento(duracionDelProcesamiento);
+			nuevoEvento.setServidorInvolucrado(servidorInvolucrado);		
 			eventos.agregar(nuevoEvento);	
 		}
 		else {
-
-			modeloActual.actualizarServidorDisponible();
+			modeloActual.actualizarServidorDisponible(servidorInvolucrado);
 		}
 
 	}
