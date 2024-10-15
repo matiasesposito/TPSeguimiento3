@@ -59,7 +59,7 @@ public class EventoArribarACola extends Evento {
 				nuevoEventoAdicional.setServidorInvolucrado(i);	
 				eventos.agregar(nuevoEventoAdicional);
 
-				contadoresEjemplo.actualizarTiempoEnSistema(duracionDelProcesamiento);
+				contadoresEjemplo.actualizarTiempoEnSistema((double) duracionDelProcesamiento);
 				contadoresEjemplo.actualizarTiempoOcupacion(i, duracionDelProcesamiento);
 				break;
 			}

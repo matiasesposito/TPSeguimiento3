@@ -7,7 +7,7 @@ import java.util.List;
 /* Variables que almacenan información estadística referida al comportamiento del sistema. */
 
 public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
-	int cantidadServidores = 2;
+	int cantidadServidores = 1;
 	//Estadisticos auxiliares
 	private ArrayList<Integer> cantSolicitudesProcesadas;
 	private ArrayList<ArrayList> historialClases;

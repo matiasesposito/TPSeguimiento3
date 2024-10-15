@@ -10,7 +10,7 @@ public class ModeloDelEjemplo extends EstadoDelSistema {
 	
 	private ColaDeSolicitudes cola;
 	private ArrayList<Servidor> servidor;
-	private int cantidadServidores = 2;		//Factor experimental (modificable)(modificar tambien ContadoresEstadisticosEjemplo)
+	private int cantidadServidores = 1;		//Factor experimental (modificable)(modificar tambien ContadoresEstadisticosEjemplo)
 	
 
 	public void inicializar() {
