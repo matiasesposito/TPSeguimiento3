@@ -52,6 +52,7 @@ public class EventoTerminaProcesamiento extends Evento {
 			
 			double tiempoEnSistema = (getTiempoDeOcurrencia() - solicitudAProcesar.getTiempoArribo()) + duracionDelProcesamiento;
 			contadoresEjemplo.actualizarTiempoEnSistema(tiempoEnSistema);
+			contadoresEjemplo.actualizarTiempoOcupacion(servidorInvolucrado, (double) duracionDelProcesamiento);
 		}
 		else {
 			modeloActual.actualizarServidorDisponible(servidorInvolucrado);

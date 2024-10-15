@@ -21,6 +21,8 @@ public class GeneradorDeReportesEjemplo extends GeneradorDeReportes {
 		contadoresEjemplo.calcularTiempoPromClientesKiosco();
 		contadoresEjemplo.calcularTasaAtencionEmpleadas(tiempoFinSimulacion);
 		ArrayList<Double> tasaAtencionEmpleadas = contadoresEjemplo.getTasaAtencionEmpleadas();
+		contadoresEjemplo.calcularPorcentajeTiempoLibre(tiempoFinSimulacion);
+		ArrayList<Double> porcentajeTiempoLibre = contadoresEjemplo.getPorcentajeTiempoLibreEmpleadas();
 		
 		System.out.println("------------------------------------------------------");
 		System.out.println("***GENERADOR DE REPORTES *** ");
@@ -32,6 +34,9 @@ public class GeneradorDeReportesEjemplo extends GeneradorDeReportes {
 		System.out.println("El tiempo promedio de los clientes en el kiosco es: " + contadoresEjemplo.getTiempoPromClientesKiosco());
 		for (int i = 0; i < tasaAtencionEmpleadas.size(); i++) {
 			System.out.println("La tasa de atención (clientes por hora) para la empleada " + (i+1) + " es: " + tasaAtencionEmpleadas.get(i));
+		}
+		for (int i = 0; i < porcentajeTiempoLibre.size(); i++) {
+			System.out.println("El porcentaje de tiempo libre para la empleada " + (i+1) + " es: " + (100 * porcentajeTiempoLibre.get(i)) + "%");
 		}
 	}
 

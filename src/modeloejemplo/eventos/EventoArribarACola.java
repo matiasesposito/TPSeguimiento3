@@ -60,6 +60,7 @@ public class EventoArribarACola extends Evento {
 				eventos.agregar(nuevoEventoAdicional);
 
 				contadoresEjemplo.actualizarTiempoEnSistema(duracionDelProcesamiento);
+				contadoresEjemplo.actualizarTiempoOcupacion(i, duracionDelProcesamiento);
 				break;
 			}
 		}

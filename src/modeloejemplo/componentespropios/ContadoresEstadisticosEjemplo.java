@@ -12,6 +12,7 @@ public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
 	private ArrayList<Integer> cantSolicitudesProcesadas;
 	private ArrayList<ArrayList> historialClases;
 	private double tiempoTotalEnSistema;
+	private ArrayList<Double> tiempoOcupacionServidores;
 	//Estadisticos para salida
 	private float beneficioObtenido;
 	private int longPromCola;  //Falta este
@@ -30,15 +31,22 @@ public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
 		}
 		this.historialClases = new ArrayList<>();
 		tiempoTotalEnSistema = 0;
+		tiempoOcupacionServidores = new ArrayList<Double>();
+		for (int i = 0; i < cantidadServidores; i++) {
+			tiempoOcupacionServidores.add(0d);
+		}
 
 		beneficioObtenido = 0;
 		longPromCola = 0;
 		tiempoPromClientesKiosco = 0;
 		tasaAtencionEmpleadas = new ArrayList<Double>();
 		for (int i = 0; i < cantidadServidores; i++) {
-			tasaAtencionEmpleadas.add(null);
+			tasaAtencionEmpleadas.add(0d);
 		}
 		PorcentajeTiempoLibreEmpleadas = new ArrayList<Double>();
+		for (int i = 0; i < cantidadServidores; i++) {
+			PorcentajeTiempoLibreEmpleadas.add(0d);
+		}
 	}
 
 	public ArrayList<Integer> getCantSolicitudesProcesadas() {
@@ -75,6 +83,11 @@ public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
 		tiempoTotalEnSistema += t;		
 	}
 
+	public void actualizarTiempoOcupacion(int i, double t) {
+		Double tiempo = tiempoOcupacionServidores.get(i);
+		tiempoOcupacionServidores.set(i, tiempo + t);	
+	}
+
 	public void calcularTiempoPromClientesKiosco() {
 		tiempoPromClientesKiosco = tiempoTotalEnSistema / getCantTotalProcesadas();
 	}
@@ -109,5 +122,16 @@ public class ContadoresEstadisticosEjemplo extends ContadoresEstadisticos {
 			double tasa = cantSolicitudesProcesadas.get(i) / (tiempoFinSimulacion / 60);
 			tasaAtencionEmpleadas.set(i, tasa);
 		}
+	}
+
+	public void calcularPorcentajeTiempoLibre(double tiempoFinSimulacion) {
+		for (int i = 0; i < PorcentajeTiempoLibreEmpleadas.size(); i++) {
+			double valor = tiempoOcupacionServidores.get(i) / tiempoFinSimulacion;
+			PorcentajeTiempoLibreEmpleadas.set(i, 1 - valor);
+		}
+	}
+
+	public ArrayList<Double> getPorcentajeTiempoLibreEmpleadas() {
+		return PorcentajeTiempoLibreEmpleadas;
 	}
 }

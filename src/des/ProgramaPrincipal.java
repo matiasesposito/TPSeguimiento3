@@ -75,15 +75,15 @@ public class ProgramaPrincipal {
 		//TODO Aca se debe programar según el fin sea por tiempo o cantidad.
 		
 		//Ejemplo por tiempo
-		int tiempoDeSimulacion = 50;
+		/*int tiempoDeSimulacion = 50;
 		if(reloj.getValor() >= tiempoDeSimulacion) return true;
-		return false;
+		return false;*/
 		
 		//Ejemplo por cantidad: "Que se hayan procesado 15 solicitudes."
-		/*ContadoresEstadisticosEjemplo contadorEjemplo = (ContadoresEstadisticosEjemplo) contadores;
-		int cantidadDeSimulacion = contadorEjemplo.getCantProcesadas(), topeDeSimulacion=15;
+		ContadoresEstadisticosEjemplo contadorEjemplo = (ContadoresEstadisticosEjemplo) contadores;
+		int cantidadDeSimulacion = contadorEjemplo.getCantTotalProcesadas(), topeDeSimulacion=10;
 		if(cantidadDeSimulacion >= topeDeSimulacion) return true;
-		return false;*/
+		return false;
 		
 	}
 
